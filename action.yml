@@ -1,23 +1,51 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: Upload mod to mod.io
+description: Upload a mod to mod.io
+author: Thundernerd
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: arrow-up-circle
+  color: green
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  bearer-token:
+    description: the bearer token for auth
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: Your output description here
+  game-id:
+    description: the numeric id of the game
+    required: true
+  mod-id:
+    description: the numeric id of the mod
+    required: true
+  file-path:
+    description: the path to the file you want to upload
+    required: true
+  version:
+    description:
+      Version of the file release (recommended format 1.0.0 - MAJOR.MINOR.PATCH)
+    required: false
+  changelog:
+    description: Changelog of this release
+    required: false
+  active:
+    description:
+      Flag this upload as the current release, this will change the modfile
+      field on the parent mod to the id of this file after upload
+    required: false
+  filehash:
+    description:
+      MD5 of the submitted file. When supplied the MD5 will be compared against
+      the uploaded files MD5. If they don't match a 422 Unprocessible Entity
+      error will be returned
+    required: false
+  metadata_blob:
+    description:
+      Metadata that is designed to be handled by the game client and is
+      recommended to not be exposed to content creators when submitting their
+      modfiles. As an example, this may include properties such as what version
+      of the game this file is compatible with
+    required: false
 
 runs:
   using: node24
